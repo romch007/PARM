@@ -261,6 +261,11 @@ end type_architecture;
       <a name="in_width" val="1"/>
       <a name="out_width" val="4"/>
     </comp>
+    <comp lib="0" loc="(1380,190)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="FlagsMask"/>
+      <a name="width" val="4"/>
+    </comp>
     <comp lib="0" loc="(1380,340)" name="Bit Extender">
       <a name="in_width" val="1"/>
       <a name="out_width" val="3"/>
@@ -480,6 +485,24 @@ end type_architecture;
     <comp lib="0" loc="(720,760)" name="Tunnel">
       <a name="label" val="UseImm5"/>
     </comp>
+    <comp lib="0" loc="(780,1470)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="UseImm5"/>
+    </comp>
+    <comp lib="0" loc="(870,1380)" name="Constant"/>
+    <comp lib="0" loc="(930,1370)" name="Splitter">
+      <a name="bit0" val="3"/>
+      <a name="bit1" val="2"/>
+      <a name="bit2" val="1"/>
+      <a name="bit3" val="0"/>
+      <a name="facing" val="west"/>
+      <a name="fanout" val="4"/>
+      <a name="incoming" val="4"/>
+    </comp>
+    <comp lib="0" loc="(930,1370)" name="Tunnel">
+      <a name="label" val="FlagsMask"/>
+      <a name="width" val="4"/>
+    </comp>
     <comp lib="1" loc="(1400,670)" name="AND Gate">
       <a name="width" val="5"/>
     </comp>
@@ -592,6 +615,12 @@ end type_architecture;
     </comp>
     <comp lib="1" loc="(700,1340)" name="OR Gate">
       <a name="inputs" val="3"/>
+    </comp>
+    <comp lib="1" loc="(820,1460)" name="NOR Gate">
+      <a name="size" val="30"/>
+    </comp>
+    <comp lib="1" loc="(910,1400)" name="NOT Gate">
+      <a name="size" val="20"/>
     </comp>
     <comp lib="2" loc="(1140,870)" name="Multiplexer">
       <a name="select" val="4"/>
@@ -842,6 +871,7 @@ end type_architecture;
     <wire from="(490,1340)" to="(650,1340)"/>
     <wire from="(500,1050)" to="(500,1400)"/>
     <wire from="(500,1050)" to="(540,1050)"/>
+    <wire from="(500,1400)" to="(780,1400)"/>
     <wire from="(510,1060)" to="(510,1460)"/>
     <wire from="(510,1060)" to="(540,1060)"/>
     <wire from="(520,1070)" to="(520,1520)"/>
@@ -853,5 +883,13 @@ end type_architecture;
     <wire from="(580,1050)" to="(1120,1050)"/>
     <wire from="(650,1220)" to="(650,1320)"/>
     <wire from="(650,1360)" to="(650,1580)"/>
+    <wire from="(780,1400)" to="(780,1450)"/>
+    <wire from="(780,1400)" to="(890,1400)"/>
+    <wire from="(820,1410)" to="(820,1460)"/>
+    <wire from="(820,1410)" to="(910,1410)"/>
+    <wire from="(870,1380)" to="(890,1380)"/>
+    <wire from="(890,1380)" to="(890,1390)"/>
+    <wire from="(890,1380)" to="(910,1380)"/>
+    <wire from="(890,1390)" to="(910,1390)"/>
   </circuit>
 </project>
