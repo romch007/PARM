@@ -282,6 +282,10 @@ end type_architecture;
       <a name="in_width" val="1"/>
       <a name="out_width" val="4"/>
     </comp>
+    <comp lib="0" loc="(1400,250)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Carry"/>
+    </comp>
     <comp lib="0" loc="(1430,170)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
@@ -443,6 +447,9 @@ end type_architecture;
     <comp lib="0" loc="(420,1490)" name="Tunnel">
       <a name="label" val="UseRn"/>
     </comp>
+    <comp lib="0" loc="(700,1340)" name="Tunnel">
+      <a name="label" val="Carry"/>
+    </comp>
     <comp lib="1" loc="(1400,670)" name="AND Gate">
       <a name="width" val="5"/>
     </comp>
@@ -549,6 +556,9 @@ end type_architecture;
     </comp>
     <comp lib="1" loc="(420,1490)" name="NOR Gate">
       <a name="inputs" val="4"/>
+    </comp>
+    <comp lib="1" loc="(700,1340)" name="OR Gate">
+      <a name="inputs" val="3"/>
     </comp>
     <comp lib="2" loc="(1140,870)" name="Multiplexer">
       <a name="select" val="4"/>
@@ -777,10 +787,12 @@ end type_architecture;
     <wire from="(460,1010)" to="(540,1010)"/>
     <wire from="(470,1020)" to="(470,1220)"/>
     <wire from="(470,1020)" to="(540,1020)"/>
+    <wire from="(470,1220)" to="(650,1220)"/>
     <wire from="(480,1030)" to="(480,1280)"/>
     <wire from="(480,1030)" to="(540,1030)"/>
     <wire from="(490,1040)" to="(490,1340)"/>
     <wire from="(490,1040)" to="(540,1040)"/>
+    <wire from="(490,1340)" to="(650,1340)"/>
     <wire from="(500,1050)" to="(500,1400)"/>
     <wire from="(500,1050)" to="(540,1050)"/>
     <wire from="(510,1060)" to="(510,1460)"/>
@@ -789,6 +801,9 @@ end type_architecture;
     <wire from="(520,1070)" to="(540,1070)"/>
     <wire from="(530,1080)" to="(530,1580)"/>
     <wire from="(530,1080)" to="(540,1080)"/>
+    <wire from="(530,1580)" to="(650,1580)"/>
     <wire from="(580,1050)" to="(1120,1050)"/>
+    <wire from="(650,1220)" to="(650,1320)"/>
+    <wire from="(650,1360)" to="(650,1580)"/>
   </circuit>
 </project>
