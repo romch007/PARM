@@ -441,7 +441,7 @@ end type_architecture;
     <comp lib="0" loc="(390,1070)" name="Tunnel">
       <a name="label" val="UseImm5"/>
     </comp>
-    <comp lib="0" loc="(420,1310)" name="Tunnel">
+    <comp lib="0" loc="(400,1190)" name="Tunnel">
       <a name="label" val="UseRm"/>
     </comp>
     <comp lib="0" loc="(420,1490)" name="Tunnel">
@@ -551,7 +551,7 @@ end type_architecture;
       <a name="inputs" val="3"/>
       <a name="size" val="30"/>
     </comp>
-    <comp lib="1" loc="(420,1310)" name="OR Gate">
+    <comp lib="1" loc="(400,1190)" name="OR Gate">
       <a name="size" val="30"/>
     </comp>
     <comp lib="1" loc="(420,1490)" name="NOR Gate">
@@ -743,10 +743,10 @@ end type_architecture;
     <wire from="(280,120)" to="(300,120)"/>
     <wire from="(330,1040)" to="(340,1040)"/>
     <wire from="(330,1100)" to="(350,1100)"/>
-    <wire from="(330,1160)" to="(460,1160)"/>
-    <wire from="(330,1220)" to="(470,1220)"/>
-    <wire from="(330,1280)" to="(380,1280)"/>
-    <wire from="(330,1340)" to="(380,1340)"/>
+    <wire from="(330,1160)" to="(370,1160)"/>
+    <wire from="(330,1220)" to="(370,1220)"/>
+    <wire from="(330,1280)" to="(480,1280)"/>
+    <wire from="(330,1340)" to="(490,1340)"/>
     <wire from="(330,1400)" to="(350,1400)"/>
     <wire from="(330,1460)" to="(340,1460)"/>
     <wire from="(330,1520)" to="(340,1520)"/>
@@ -773,12 +773,10 @@ end type_architecture;
     <wire from="(350,1580)" to="(530,1580)"/>
     <wire from="(350,980)" to="(350,1060)"/>
     <wire from="(350,980)" to="(540,980)"/>
-    <wire from="(380,1280)" to="(380,1300)"/>
-    <wire from="(380,1280)" to="(480,1280)"/>
-    <wire from="(380,1300)" to="(390,1300)"/>
-    <wire from="(380,1320)" to="(380,1340)"/>
-    <wire from="(380,1320)" to="(390,1320)"/>
-    <wire from="(380,1340)" to="(490,1340)"/>
+    <wire from="(370,1160)" to="(370,1180)"/>
+    <wire from="(370,1160)" to="(460,1160)"/>
+    <wire from="(370,1200)" to="(370,1220)"/>
+    <wire from="(370,1220)" to="(470,1220)"/>
     <wire from="(440,990)" to="(440,1040)"/>
     <wire from="(440,990)" to="(540,990)"/>
     <wire from="(450,1000)" to="(450,1100)"/>
