@@ -167,10 +167,10 @@ end type_architecture;
       <circ-port dir="out" pin="1430,170" x="270" y="200"/>
       <circ-port dir="out" pin="1430,240" x="270" y="40"/>
       <circ-port dir="out" pin="1430,290" x="270" y="60"/>
-      <circ-port dir="out" pin="1430,450" x="270" y="160"/>
       <circ-port dir="out" pin="1430,550" x="270" y="180"/>
       <circ-port dir="out" pin="1430,760" x="270" y="100"/>
       <circ-port dir="out" pin="1430,890" x="270" y="120"/>
+      <circ-port dir="out" pin="1500,450" x="270" y="160"/>
       <circ-port dir="out" pin="1540,360" x="270" y="140"/>
       <circ-port dir="out" pin="1550,650" x="270" y="80"/>
     </appear>
@@ -240,6 +240,10 @@ end type_architecture;
       <a name="in_width" val="1"/>
       <a name="out_width" val="3"/>
     </comp>
+    <comp lib="0" loc="(1320,450)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="UseRn"/>
+    </comp>
     <comp lib="0" loc="(1350,650)" name="Bit Extender">
       <a name="in_width" val="1"/>
       <a name="out_width" val="5"/>
@@ -249,15 +253,15 @@ end type_architecture;
       <a name="label" val="Imm5"/>
       <a name="width" val="5"/>
     </comp>
+    <comp lib="0" loc="(1360,450)" name="Bit Extender">
+      <a name="in_width" val="1"/>
+      <a name="out_width" val="3"/>
+    </comp>
     <comp lib="0" loc="(1380,150)" name="Bit Extender">
       <a name="in_width" val="1"/>
       <a name="out_width" val="4"/>
     </comp>
     <comp lib="0" loc="(1380,340)" name="Bit Extender">
-      <a name="in_width" val="1"/>
-      <a name="out_width" val="3"/>
-    </comp>
-    <comp lib="0" loc="(1380,430)" name="Bit Extender">
       <a name="in_width" val="1"/>
       <a name="out_width" val="3"/>
     </comp>
@@ -297,13 +301,6 @@ end type_architecture;
       <a name="label" val="Imm32_Enable"/>
       <a name="output" val="true"/>
     </comp>
-    <comp lib="0" loc="(1430,450)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Rn"/>
-      <a name="output" val="true"/>
-      <a name="width" val="3"/>
-    </comp>
     <comp lib="0" loc="(1430,550)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
@@ -324,6 +321,17 @@ end type_architecture;
       <a name="label" val="ALU_Opcode"/>
       <a name="output" val="true"/>
       <a name="width" val="4"/>
+    </comp>
+    <comp lib="0" loc="(1450,430)" name="Bit Extender">
+      <a name="in_width" val="1"/>
+      <a name="out_width" val="3"/>
+    </comp>
+    <comp lib="0" loc="(1500,450)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Rn"/>
+      <a name="output" val="true"/>
+      <a name="width" val="3"/>
     </comp>
     <comp lib="0" loc="(1500,630)" name="Bit Extender">
       <a name="in_width" val="1"/>
@@ -432,8 +440,14 @@ end type_architecture;
     <comp lib="0" loc="(420,1310)" name="Tunnel">
       <a name="label" val="UseRm"/>
     </comp>
+    <comp lib="0" loc="(420,1490)" name="Tunnel">
+      <a name="label" val="UseRn"/>
+    </comp>
     <comp lib="1" loc="(1400,670)" name="AND Gate">
       <a name="width" val="5"/>
+    </comp>
+    <comp lib="1" loc="(1410,470)" name="AND Gate">
+      <a name="width" val="3"/>
     </comp>
     <comp lib="1" loc="(1430,170)" name="AND Gate">
       <a name="width" val="4"/>
@@ -444,10 +458,6 @@ end type_architecture;
     <comp lib="1" loc="(1430,290)" name="AND Gate">
       <a name="size" val="30"/>
     </comp>
-    <comp lib="1" loc="(1430,450)" name="AND Gate">
-      <a name="inputs" val="3"/>
-      <a name="width" val="3"/>
-    </comp>
     <comp lib="1" loc="(1430,550)" name="AND Gate">
       <a name="width" val="3"/>
     </comp>
@@ -456,6 +466,9 @@ end type_architecture;
     </comp>
     <comp lib="1" loc="(1430,890)" name="AND Gate">
       <a name="width" val="4"/>
+    </comp>
+    <comp lib="1" loc="(1500,450)" name="AND Gate">
+      <a name="width" val="3"/>
     </comp>
     <comp lib="1" loc="(1540,360)" name="AND Gate">
       <a name="inputs" val="3"/>
@@ -534,6 +547,9 @@ end type_architecture;
     <comp lib="1" loc="(420,1310)" name="OR Gate">
       <a name="size" val="30"/>
     </comp>
+    <comp lib="1" loc="(420,1490)" name="NOR Gate">
+      <a name="inputs" val="4"/>
+    </comp>
     <comp lib="2" loc="(1140,870)" name="Multiplexer">
       <a name="select" val="4"/>
       <a name="width" val="4"/>
@@ -596,7 +612,7 @@ end type_architecture;
     <wire from="(1260,340)" to="(1260,430)"/>
     <wire from="(1260,340)" to="(1340,340)"/>
     <wire from="(1260,430)" to="(1260,530)"/>
-    <wire from="(1260,430)" to="(1340,430)"/>
+    <wire from="(1260,430)" to="(1410,430)"/>
     <wire from="(1260,530)" to="(1260,630)"/>
     <wire from="(1260,530)" to="(1340,530)"/>
     <wire from="(1260,630)" to="(1260,740)"/>
@@ -611,6 +627,7 @@ end type_architecture;
     <wire from="(1400,380)" to="(1400,400)"/>
     <wire from="(1400,380)" to="(1490,380)"/>
     <wire from="(1400,670)" to="(1500,670)"/>
+    <wire from="(1410,470)" to="(1450,470)"/>
     <wire from="(160,150)" to="(190,150)"/>
     <wire from="(190,100)" to="(190,150)"/>
     <wire from="(190,270)" to="(210,270)"/>
@@ -665,6 +682,8 @@ end type_architecture;
     <wire from="(220,1510)" to="(300,1510)"/>
     <wire from="(220,1570)" to="(220,1640)"/>
     <wire from="(220,1570)" to="(300,1570)"/>
+    <wire from="(220,170)" to="(220,490)"/>
+    <wire from="(220,490)" to="(1360,490)"/>
     <wire from="(220,950)" to="(220,970)"/>
     <wire from="(220,970)" to="(220,1030)"/>
     <wire from="(220,970)" to="(290,970)"/>
@@ -718,18 +737,30 @@ end type_architecture;
     <wire from="(330,1220)" to="(470,1220)"/>
     <wire from="(330,1280)" to="(380,1280)"/>
     <wire from="(330,1340)" to="(380,1340)"/>
-    <wire from="(330,1400)" to="(500,1400)"/>
-    <wire from="(330,1460)" to="(510,1460)"/>
-    <wire from="(330,1520)" to="(520,1520)"/>
-    <wire from="(330,1580)" to="(530,1580)"/>
+    <wire from="(330,1400)" to="(350,1400)"/>
+    <wire from="(330,1460)" to="(340,1460)"/>
+    <wire from="(330,1520)" to="(340,1520)"/>
+    <wire from="(330,1580)" to="(350,1580)"/>
     <wire from="(330,980)" to="(350,980)"/>
     <wire from="(340,1040)" to="(340,1070)"/>
     <wire from="(340,1040)" to="(440,1040)"/>
     <wire from="(340,1070)" to="(360,1070)"/>
+    <wire from="(340,1460)" to="(340,1480)"/>
+    <wire from="(340,1460)" to="(510,1460)"/>
+    <wire from="(340,1480)" to="(360,1480)"/>
+    <wire from="(340,1500)" to="(340,1520)"/>
+    <wire from="(340,1500)" to="(360,1500)"/>
+    <wire from="(340,1520)" to="(520,1520)"/>
     <wire from="(350,1060)" to="(360,1060)"/>
     <wire from="(350,1080)" to="(350,1100)"/>
     <wire from="(350,1080)" to="(360,1080)"/>
     <wire from="(350,1100)" to="(450,1100)"/>
+    <wire from="(350,1400)" to="(350,1470)"/>
+    <wire from="(350,1400)" to="(500,1400)"/>
+    <wire from="(350,1470)" to="(360,1470)"/>
+    <wire from="(350,1510)" to="(350,1580)"/>
+    <wire from="(350,1510)" to="(360,1510)"/>
+    <wire from="(350,1580)" to="(530,1580)"/>
     <wire from="(350,980)" to="(350,1060)"/>
     <wire from="(350,980)" to="(540,980)"/>
     <wire from="(380,1280)" to="(380,1300)"/>
