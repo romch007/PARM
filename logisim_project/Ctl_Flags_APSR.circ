@@ -8,6 +8,15 @@
       <a name="fanout" val="4"/>
       <a name="incoming" val="1"/>
     </tool>
+    <tool name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="north"/>
+    </tool>
+    <tool name="Probe">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="radix" val="10unsigned"/>
+    </tool>
     <tool name="Tunnel">
       <a name="facing" val="south"/>
     </tool>
@@ -165,15 +174,15 @@ end TCL_Generic;
       <a name="fanout" val="4"/>
       <a name="incoming" val="4"/>
     </comp>
-    <comp lib="0" loc="(210,140)" name="Pin">
+    <comp lib="0" loc="(190,580)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="Clk"/>
     </comp>
-    <comp lib="0" loc="(210,180)" name="Pin">
+    <comp lib="0" loc="(190,640)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="Rst"/>
     </comp>
-    <comp lib="0" loc="(240,120)" name="Tunnel">
+    <comp lib="0" loc="(220,560)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="Cl"/>
     </comp>
@@ -189,7 +198,7 @@ end TCL_Generic;
     <comp lib="0" loc="(250,360)" name="Tunnel">
       <a name="label" val="N"/>
     </comp>
-    <comp lib="0" loc="(280,170)" name="Tunnel">
+    <comp lib="0" loc="(260,630)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="R"/>
     </comp>
@@ -267,22 +276,22 @@ end TCL_Generic;
       <a name="appearance" val="logisim_evolution"/>
       <a name="width" val="1"/>
     </comp>
+    <wire from="(190,580)" to="(220,580)"/>
+    <wire from="(190,640)" to="(260,640)"/>
     <wire from="(200,280)" to="(230,280)"/>
     <wire from="(200,290)" to="(240,290)"/>
     <wire from="(200,300)" to="(230,300)"/>
     <wire from="(200,310)" to="(220,310)"/>
-    <wire from="(210,140)" to="(240,140)"/>
-    <wire from="(210,180)" to="(280,180)"/>
     <wire from="(220,310)" to="(220,360)"/>
     <wire from="(220,360)" to="(250,360)"/>
+    <wire from="(220,560)" to="(220,580)"/>
     <wire from="(230,270)" to="(230,280)"/>
     <wire from="(230,270)" to="(250,270)"/>
     <wire from="(230,300)" to="(230,330)"/>
     <wire from="(230,330)" to="(250,330)"/>
-    <wire from="(240,120)" to="(240,140)"/>
     <wire from="(240,290)" to="(240,300)"/>
     <wire from="(240,300)" to="(250,300)"/>
-    <wire from="(280,170)" to="(280,180)"/>
+    <wire from="(260,630)" to="(260,640)"/>
     <wire from="(590,200)" to="(590,660)"/>
     <wire from="(590,660)" to="(770,660)"/>
     <wire from="(600,200)" to="(600,540)"/>
