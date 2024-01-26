@@ -2,6 +2,13 @@ from enum import IntEnum
 import sys
 
 
+def twos_comp(val, bits):
+    """compute the 2's complement of int value val"""
+    if (val & (1 << (bits - 1))) != 0:  # if sign bit is set e.g., 8bit: 128-255
+        val = val - (1 << bits)        # compute negative value
+    return val
+
+
 class Register(IntEnum):
     R0 = 0
     R1 = 1
@@ -21,19 +28,19 @@ class Register(IntEnum):
         elif value == "r1":
             return Register.R1
         elif value == "r2":
-            return Register.R3
+            return Register.R2
         elif value == "r3":
-            return Register.R4
+            return Register.R3
         elif value == "r4":
-            return Register.R5
+            return Register.R4
         elif value == "r5":
-            return Register.R6
+            return Register.R5
         elif value == "r6":
-            return Register.R7
+            return Register.R6
         elif value == "r7":
-            return Register.PC
+            return Register.R7
         elif value == "pc":
-            return Register.SP
+            return Register.PC
         elif value == "sp":
             return Register.SP
 
@@ -192,6 +199,98 @@ class Instruction(IntEnum):
         elif value == "b":
             return Instruction.B
 
+    def to_binary(self):
+        if self == Instruction.LSLS:
+            return 0b00000
+        elif self == Instruction.LSRS:
+            return 0b00001
+        elif self == Instruction.ASRS:
+            return 0b00010
+        elif self == Instruction.ADDS:
+            return 0b0001100
+        elif self == Instruction.SUBS:
+            return 0b0001101
+        elif self == Instruction.ADDS2:
+            return 0b0001110
+        elif self == Instruction.SUBS2:
+            return 0b0001111
+        elif self == Instruction.MOVS:
+            return 0b00100
+        elif self == Instruction.CMP:
+            return 0b00101
+        elif self == Instruction.ANDS:
+            return 0b0100000000
+        elif self == Instruction.EORS:
+            return 0b0100000001
+        elif self == Instruction.LSLS:
+            return 0b0100000010
+        elif self == Instruction.LSRS:
+            return 0b0100000011
+        elif self == Instruction.ASRS:
+            return 0b0100000100
+        elif self == Instruction.ADCS:
+            return 0b0100000101
+        elif self == Instruction.SBCS:
+            return 0b0100000110
+        elif self == Instruction.RORS:
+            return 0b0100000111
+        elif self == Instruction.TST:
+            return 0b0100001000
+        elif self == Instruction.RSBS:
+            return 0b0100001001
+        elif self == Instruction.CMP:
+            return 0b0100001010
+        elif self == Instruction.CMN:
+            return 0b0100001011
+        elif self == Instruction.MULS:
+            return 0b0100001101
+        elif self == Instruction.BICS:
+            return 0b0100001110
+        elif self == Instruction.MVNS:
+            return 0b0100001111
+        elif self == Instruction.STR:
+            return 0b10010
+        elif self == Instruction.LDR:
+            return 0b10011
+        elif self == Instruction.ADDSP:
+            return 0b101100000
+        elif self == Instruction.SUBSP:
+            return 0b101100001
+        elif self == Instruction.B:
+            return 0b11100
+        elif self == Instruction.BEQ:
+            return 0b111000000
+        elif self == Instruction.BNE:
+            return 0b111000001
+        elif self == Instruction.BCS:
+            return 0b111000010
+        elif self == Instruction.BCC:
+            return 0b111000011
+        elif self == Instruction.BMI:
+            return 0b111000100
+        elif self == Instruction.BPL:
+            return 0b111000101
+        elif self == Instruction.BVS:
+            return 0b111000110
+        elif self == Instruction.BVC:
+            return 0b111000111
+        elif self == Instruction.BHI:
+            return 0b111001000
+        elif self == Instruction.BLS:
+            return 0b111001001
+        elif self == Instruction.BGE:
+            return 0b111001010
+        elif self == Instruction.BLT:
+            return 0b111001011
+        elif self == Instruction.BGT:
+            return 0b111001100
+        elif self == Instruction.BLE:
+            return 0b111001101
+        elif self == Instruction.BAL:
+            return 0b111001110
+
+        raise ValueError(f"Missing binary repr for opcode {self.__repr__()}")
+
 
 class Immediate:
     def __init__(self, size, value):
@@ -203,7 +302,7 @@ class Immediate:
         if value[0] != "#":
             raise ValueError("no hashtag at start of immediate")
 
-        return Immediate(size, int(value[1:]) // 4)
+        return Immediate(size, int(value[1:]))
 
     def __repr__(self):
         return f"<Immediate: size={self.size},value={self.value}>"
@@ -224,6 +323,9 @@ class TwoRegistersArgument(Argument):
     def to_binary(self):
         return (self.first << 3) | self.second
 
+    def binary_width(self):
+        return 6
+
 
 class RdRnRmArgument(Argument):
     def __init__(self, rd: Register, rn: Register, rm: Register):
@@ -236,6 +338,9 @@ class RdRnRmArgument(Argument):
 
     def to_binary(self):
         return (self.rm << 6) | (self.rn << 3) | self.rd
+
+    def binary_width(self):
+        return 9
 
 
 class RdRmImm5Argument(Argument):
@@ -250,6 +355,9 @@ class RdRmImm5Argument(Argument):
     def to_binary(self):
         return (self.imm5.value << 6) | (self.rm << 3) | self.rd
 
+    def binary_width(self):
+        return 11
+
 
 class RdRnImm3Argument(Argument):
     def __init__(self, rd: Register, rn: Register, imm3: Immediate):
@@ -263,6 +371,9 @@ class RdRnImm3Argument(Argument):
     def to_binary(self):
         return (self.imm3.value << 6) | (self.rn << 3) | self.rd
 
+    def binary_width(self):
+        return 9
+
 
 class RdImm8Argument(Argument):
     def __init__(self, rd: Register, imm8: Immediate):
@@ -274,6 +385,9 @@ class RdImm8Argument(Argument):
 
     def to_binary(self):
         return (self.rd << 8) | self.imm8.value
+
+    def binary_width(self):
+        return 11
 
 
 class RtSpImm8(Argument):
@@ -287,6 +401,9 @@ class RtSpImm8(Argument):
     def to_binary(self):
         return (self.rt << 8) | self.imm8.value
 
+    def binary_width(self):
+        return 11
+
 
 class SpImm7(Argument):
     def __init__(self, imm7: Immediate):
@@ -298,6 +415,9 @@ class SpImm7(Argument):
     def to_binary(self):
         return self.imm7.value
 
+    def binary_width(self):
+        return 7
+
 
 class LabelArgument(Argument):
     def __init__(self, label):
@@ -306,9 +426,17 @@ class LabelArgument(Argument):
     def __repr__(self):
         return f"<LabelArgument: {self.label}>"
 
-    def to_binary(self):
-        # TODO
-        pass
+    def to_binary(self, labels, pc, is_b):
+        if self.label not in labels:
+            raise RuntimeError(f"label '{self.label}' not found")
+
+        addr = labels[self.label] - pc - 3
+        val = twos_comp(addr, 11 if is_b else 8)
+
+        return val
+
+    def binary_width(self):
+        return 8
 
 
 def parse_two_registers(args):
@@ -364,6 +492,7 @@ def parse_rt_sp_imm8(args):
 
     reg = Register.from_str(args[0])
     addr = parse_address(args[1], 8)
+    addr[1].value //= 4
 
     if addr[0] != Register.SP:
         raise ValueError("invalid register")
@@ -377,6 +506,7 @@ def parse_sp_imm7(args):
     if reg != Register.SP:
         raise ValueError("register should be sp")
     imm = Immediate.from_str(7, args[1])
+    imm.value //= 4
 
     return SpImm7(imm)
 
@@ -458,14 +588,32 @@ args_parser = {
 
 
 def parse(input_assembly):
+    labels = {}
+
     lines = input_assembly.splitlines()
     lines = filter(None, lines)
-    instructions = [parse_line(line) for line in lines]
-    return instructions
+    instructions = []
+    pc = 0
+
+    for line in lines:
+        parsed = parse_line(line, labels, pc)
+        if parsed is not None:
+            instructions.append(parsed)
+            pc += 1
+
+    print(labels)
+
+    return (instructions, labels)
 
 
-def parse_line(content):
-    (instr_str, args_str) = content.split(" ", 1)
+def parse_line(content, labels, pc):
+    line = content.strip()
+
+    if ":" in line:
+        labels[line[:-1]] = pc
+        return
+
+    (instr_str, args_str) = line.split(" ", 1)
     instr = Instruction.from_str(instr_str, args_str)
 
     instr_parser = args_parser[instr]
@@ -474,7 +622,37 @@ def parse_line(content):
     return (instr, args)
 
 
+def export_instruction(instr, labels, pc):
+    opcode = instr[0].to_binary()
+    if isinstance(instr[1], LabelArgument):
+        args = instr[1].to_binary(labels, pc)
+    else:
+        args = instr[1].to_binary()
+
+    if instr[0] == Instruction.B:
+        width = 11
+    else:
+        width = instr[1].binary_width()
+
+    return (opcode << width) | args
+
+
+def export(instructions, labels):
+    binarys = [export_instruction(instr, labels, pc)
+               for (pc, instr) in enumerate(instructions)]
+
+    binarys = ['{0:04x}'.format(val) for val in binarys]
+    return "v2.0 raw\n" + " ".join(binarys)
+
+
 f = open(sys.argv[1], "r")
 content = f.read()
 
-print(parse(content))
+(instructions, labels) = parse(content)
+
+print(instructions)
+print(labels)
+
+output = export(instructions, labels)
+
+print(output)
