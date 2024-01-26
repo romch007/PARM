@@ -8,6 +8,9 @@
       <a name="fanout" val="4"/>
       <a name="incoming" val="1"/>
     </tool>
+    <tool name="Pin">
+      <a name="appearance" val="classic"/>
+    </tool>
     <tool name="Tunnel">
       <a name="facing" val="south"/>
     </tool>
@@ -88,25 +91,7 @@ end type_architecture;
 </a>
     </tool>
   </lib>
-  <lib desc="#TCL" name="7">
-    <tool name="TclGeneric">
-      <a name="content">library ieee;
-use ieee.std_logic_1164.all;
-
-entity TCL_Generic is
-  port(
-    --Insert input ports below
-    horloge_i  : in  std_logic;                    -- input bit example
-    val_i      : in  std_logic_vector(3 downto 0); -- input vector example
-
-	  --Insert output ports below
-    max_o      : out std_logic;                    -- output bit example
-    cpt_o      : out std_logic_Vector(3 downto 0)  -- output vector example
-  );
-end TCL_Generic;
-</a>
-    </tool>
-  </lib>
+  <lib desc="#TCL" name="7"/>
   <lib desc="#Base" name="8">
     <tool name="Text Tool">
       <a name="font" val="SansSerif plain 12"/>
@@ -156,40 +141,40 @@ end TCL_Generic;
       <a name="fanout" val="4"/>
       <a name="incoming" val="4"/>
     </comp>
-    <comp lib="0" loc="(180,320)" name="Pin">
+    <comp lib="0" loc="(200,270)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="Flags_In"/>
       <a name="width" val="4"/>
     </comp>
-    <comp lib="0" loc="(180,320)" name="Splitter">
+    <comp lib="0" loc="(200,270)" name="Splitter">
       <a name="fanout" val="4"/>
       <a name="incoming" val="4"/>
     </comp>
-    <comp lib="0" loc="(210,140)" name="Pin">
+    <comp lib="0" loc="(200,390)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="Clk"/>
     </comp>
-    <comp lib="0" loc="(210,180)" name="Pin">
+    <comp lib="0" loc="(200,470)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="label" val="Rst"/>
     </comp>
-    <comp lib="0" loc="(240,120)" name="Tunnel">
+    <comp lib="0" loc="(230,370)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="Cl"/>
     </comp>
-    <comp lib="0" loc="(250,270)" name="Tunnel">
+    <comp lib="0" loc="(270,220)" name="Tunnel">
       <a name="label" val="V"/>
     </comp>
-    <comp lib="0" loc="(250,300)" name="Tunnel">
+    <comp lib="0" loc="(270,250)" name="Tunnel">
       <a name="label" val="C"/>
     </comp>
-    <comp lib="0" loc="(250,330)" name="Tunnel">
+    <comp lib="0" loc="(270,280)" name="Tunnel">
       <a name="label" val="Z"/>
     </comp>
-    <comp lib="0" loc="(250,360)" name="Tunnel">
+    <comp lib="0" loc="(270,310)" name="Tunnel">
       <a name="label" val="N"/>
     </comp>
-    <comp lib="0" loc="(280,170)" name="Tunnel">
+    <comp lib="0" loc="(270,460)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="R"/>
     </comp>
@@ -267,22 +252,22 @@ end TCL_Generic;
       <a name="appearance" val="logisim_evolution"/>
       <a name="width" val="1"/>
     </comp>
-    <wire from="(200,280)" to="(230,280)"/>
-    <wire from="(200,290)" to="(240,290)"/>
-    <wire from="(200,300)" to="(230,300)"/>
-    <wire from="(200,310)" to="(220,310)"/>
-    <wire from="(210,140)" to="(240,140)"/>
-    <wire from="(210,180)" to="(280,180)"/>
-    <wire from="(220,310)" to="(220,360)"/>
-    <wire from="(220,360)" to="(250,360)"/>
-    <wire from="(230,270)" to="(230,280)"/>
-    <wire from="(230,270)" to="(250,270)"/>
-    <wire from="(230,300)" to="(230,330)"/>
-    <wire from="(230,330)" to="(250,330)"/>
-    <wire from="(240,120)" to="(240,140)"/>
-    <wire from="(240,290)" to="(240,300)"/>
-    <wire from="(240,300)" to="(250,300)"/>
-    <wire from="(280,170)" to="(280,180)"/>
+    <wire from="(200,390)" to="(230,390)"/>
+    <wire from="(200,470)" to="(270,470)"/>
+    <wire from="(220,230)" to="(250,230)"/>
+    <wire from="(220,240)" to="(260,240)"/>
+    <wire from="(220,250)" to="(250,250)"/>
+    <wire from="(220,260)" to="(240,260)"/>
+    <wire from="(230,370)" to="(230,390)"/>
+    <wire from="(240,260)" to="(240,310)"/>
+    <wire from="(240,310)" to="(270,310)"/>
+    <wire from="(250,220)" to="(250,230)"/>
+    <wire from="(250,220)" to="(270,220)"/>
+    <wire from="(250,250)" to="(250,280)"/>
+    <wire from="(250,280)" to="(270,280)"/>
+    <wire from="(260,240)" to="(260,250)"/>
+    <wire from="(260,250)" to="(270,250)"/>
+    <wire from="(270,460)" to="(270,470)"/>
     <wire from="(590,200)" to="(590,660)"/>
     <wire from="(590,660)" to="(770,660)"/>
     <wire from="(600,200)" to="(600,540)"/>
