@@ -2,13 +2,6 @@ from enum import IntEnum
 import sys
 
 
-def twos_comp(val, bits):
-    """compute the 2's complement of int value val"""
-    if (val & (1 << (bits - 1))) != 0:  # if sign bit is set e.g., 8bit: 128-255
-        val = val - (1 << bits)        # compute negative value
-    return val
-
-
 class Register(IntEnum):
     R0 = 0
     R1 = 1
@@ -419,6 +412,14 @@ class SpImm7(Argument):
         return 7
 
 
+def twos_comp(num, bits=8):
+    # Calculate two's complement representation
+    if num < 0:
+        num = (1 << bits) + num
+
+    return num
+
+
 class LabelArgument(Argument):
     def __init__(self, label):
         self.label = label
@@ -431,12 +432,10 @@ class LabelArgument(Argument):
             raise RuntimeError(f"label '{self.label}' not found")
 
         addr = labels[self.label] - pc - 3
-        val = twos_comp(addr, 11 if is_b else 8)
+        return twos_comp(addr, self.binary_width(is_b))
 
-        return val
-
-    def binary_width(self):
-        return 8
+    def binary_width(self, is_b):
+        return 11 if is_b else 8
 
 
 def parse_two_registers(args):
@@ -601,16 +600,18 @@ def parse(input_assembly):
             instructions.append(parsed)
             pc += 1
 
-    print(labels)
-
     return (instructions, labels)
 
 
 def parse_line(content, labels, pc):
     line = content.strip()
+    line = ' '.join(line.split())
 
     if ":" in line:
         labels[line[:-1]] = pc
+        return
+
+    if line[0] in ('.', '@'):
         return
 
     (instr_str, args_str) = line.split(" ", 1)
@@ -624,14 +625,12 @@ def parse_line(content, labels, pc):
 
 def export_instruction(instr, labels, pc):
     opcode = instr[0].to_binary()
+
     if isinstance(instr[1], LabelArgument):
-        args = instr[1].to_binary(labels, pc)
+        args = instr[1].to_binary(labels, pc, instr[0] == Instruction.B)
+        width = instr[1].binary_width(instr[0] == Instruction.B)
     else:
         args = instr[1].to_binary()
-
-    if instr[0] == Instruction.B:
-        width = 11
-    else:
         width = instr[1].binary_width()
 
     return (opcode << width) | args
@@ -649,9 +648,6 @@ f = open(sys.argv[1], "r")
 content = f.read()
 
 (instructions, labels) = parse(content)
-
-print(instructions)
-print(labels)
 
 output = export(instructions, labels)
 
