@@ -209,7 +209,7 @@ class Instruction(IntEnum):
             return 0b0001111
         elif self == Instruction.MOVS:
             return 0b00100
-        elif self == Instruction.CMP:
+        elif self == Instruction.CMP2:
             return 0b00101
         elif self == Instruction.ANDS:
             return 0b0100000000
@@ -252,35 +252,35 @@ class Instruction(IntEnum):
         elif self == Instruction.B:
             return 0b11100
         elif self == Instruction.BEQ:
-            return 0b111000000
+            return 0b11010000
         elif self == Instruction.BNE:
-            return 0b111000001
+            return 0b11010001
         elif self == Instruction.BCS:
-            return 0b111000010
+            return 0b11010010
         elif self == Instruction.BCC:
-            return 0b111000011
+            return 0b11010011
         elif self == Instruction.BMI:
-            return 0b111000100
+            return 0b11010100
         elif self == Instruction.BPL:
-            return 0b111000101
+            return 0b11010101
         elif self == Instruction.BVS:
-            return 0b111000110
+            return 0b11010110
         elif self == Instruction.BVC:
-            return 0b111000111
+            return 0b11010111
         elif self == Instruction.BHI:
-            return 0b111001000
+            return 0b11011000
         elif self == Instruction.BLS:
-            return 0b111001001
+            return 0b11011001
         elif self == Instruction.BGE:
-            return 0b111001010
+            return 0b11011010
         elif self == Instruction.BLT:
-            return 0b111001011
+            return 0b11011011
         elif self == Instruction.BGT:
-            return 0b111001100
+            return 0b11011100
         elif self == Instruction.BLE:
-            return 0b111001101
+            return 0b11011101
         elif self == Instruction.BAL:
-            return 0b111001110
+            return 0b11011110
 
         raise ValueError(f"Missing binary repr for opcode {self.__repr__()}")
 
@@ -314,7 +314,7 @@ class TwoRegistersArgument(Argument):
         return f"<TwoRegistersArgument: first={self.first.__repr__()},second={self.second.__repr__()}>"
 
     def to_binary(self):
-        return (self.first << 3) | self.second
+        return (self.second << 3) | self.first
 
     def binary_width(self):
         return 6
