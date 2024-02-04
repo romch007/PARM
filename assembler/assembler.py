@@ -215,11 +215,11 @@ class Instruction(IntEnum):
             return 0b0100000000
         elif self == Instruction.EORS:
             return 0b0100000001
-        elif self == Instruction.LSLS:
+        elif self == Instruction.LSLS2:
             return 0b0100000010
-        elif self == Instruction.LSRS:
+        elif self == Instruction.LSRS2:
             return 0b0100000011
-        elif self == Instruction.ASRS:
+        elif self == Instruction.ASRS2:
             return 0b0100000100
         elif self == Instruction.ADCS:
             return 0b0100000101
@@ -334,6 +334,21 @@ class RdRnRmArgument(Argument):
 
     def binary_width(self):
         return 9
+
+
+class RdmRnRdmArgument(Argument):
+    def __init__(self, rdm: Register, rn: Register):
+        self.rdm = rdm
+        self.rn = rn
+
+    def __repr__(self):
+        return f"<RdmRnRdmArgument: rdm={self.rdm.__repr__()},rn={self.rn.__repr__()}>"
+
+    def to_binary(self):
+        return (self.rn << 3) | self.rdm
+
+    def binary_width(self):
+        return 6
 
 
 class RdRmImm5Argument(Argument):
@@ -457,6 +472,22 @@ def parse_rd_rn_rm(args):
     return RdRnRmArgument(first_reg, second_reg, third_reg)
 
 
+def parse_rdm_rn_rdm(args):
+    registers = args.split(", ")
+    if len(registers) != 3:
+        raise RuntimeError("more than three registers")
+
+    first_reg = Register.from_str(registers[0])
+    second_reg = Register.from_str(registers[1])
+    third_reg = Register.from_str(registers[2])
+
+    if first_reg != third_reg:
+        raise RuntimeError(
+            "argument is rdm, rn, rdm but the two rdm are different")
+
+    return RdmRnRdmArgument(first_reg, second_reg)
+
+
 def parse_rd_rm_imm5(args):
     args = args.split(", ")
     first_reg = Register.from_str(args[0])
@@ -548,6 +579,7 @@ args_parser = {
     # Rd, Rn, Rm
     Instruction.ADDS: parse_rd_rn_rm,
     Instruction.SUBS: parse_rd_rn_rm,
+    Instruction.MULS: parse_rdm_rn_rdm,
     # Label
     Instruction.BEQ: parse_label,
     Instruction.BNE: parse_label,
